@@ -1,12 +1,8 @@
 from aiogram import types
 from main import dp, bot
 
-
-# def about_comp():
-#
-#
-#     gif_file_id = 'CgACAgIAAxkBAAO_ZWwfNJY7S4-qkeziYRmngWKUqgwAAhkzAAKYQmFLgGVcrZ7UZ3AzBA'
-#     company_info = """
+# gif_file_id = 'CgACAgIAAxkBAAO_ZWwfNJY7S4-qkeziYRmngWKUqgwAAhkzAAKYQmFLgGVcrZ7UZ3AzBA'
+# company_info = """
 #     Информация о компании:
 #     Сеть ресторанов быстрого обслуживания EVOS® не стоит на месте, а постоянно растет и развивается вместе с вами и для вас!
 #     Мы расширяем свою географию и открываем новые филиалы практически каждый месяц.

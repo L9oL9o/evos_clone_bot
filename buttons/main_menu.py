@@ -10,18 +10,35 @@ main_menu = ReplyKeyboardMarkup(
 
     ], resize_keyboard=True)
 
+vacanciesss = ReplyKeyboardMarkup(
+    [
+        [KeyboardButton(text="Ташкент"), KeyboardButton(text="Андижан")],
+        [KeyboardButton(text="Коканд"), KeyboardButton(text="Наманган")],
+        [KeyboardButton(text="Ташкентская область"), KeyboardButton(text="Самарканд")],
+        [KeyboardButton(text="Фергана"), KeyboardButton(text="Хорезмская область")],
+        [KeyboardButton(text="Наваи")],
+        [KeyboardButton(text="❌ Отмена ❌"), KeyboardButton(text="⬅️ Назад")],
+
+    ], resize_keyboard=True)
 
 branches = ReplyKeyboardMarkup(
     [
-        [KeyboardButton("☕️ Показать ближайший филиал")],
-        [KeyboardButton("🏢 Головной офис"), KeyboardButton("г. Ташкент")],
-        [KeyboardButton("⬅️ Назад")],
+        [KeyboardButton(text="☕️ Показать ближайший филиал")],
+        [KeyboardButton(text="🏢 Головной офис"), KeyboardButton(text="г. Ташкент")],
+        [KeyboardButton(text="⬅️ Назад")],
     ], resize_keyboard=True)
-
 
 languages = ReplyKeyboardMarkup(
     [
-        [KeyboardButton("🇷🇺 Русский"), KeyboardButton("🇺🇿 O'zbekcha")],
-        [KeyboardButton("🔙 Назад")]
+        [KeyboardButton(text="🇷🇺 Русский"), KeyboardButton(text="🇺🇿 O'zbekcha")],
+        [KeyboardButton(text="⬅️ Назад")]
+    ], resize_keyboard=True
+)
+
+
+near_branch = ReplyKeyboardMarkup(
+    [
+        [KeyboardButton(text="📍Отправить геолокацию", request_location=True)],
+        [KeyboardButton(text="⬅️ Назад")]
     ], resize_keyboard=True
 )

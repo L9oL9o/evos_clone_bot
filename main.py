@@ -1,11 +1,12 @@
-from aiogram import Bot, Dispatcher, executor, types
-from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton, ContentTypes, message)
 from dotenv import load_dotenv
 import os
-from buttons import main_menu
-from buttons.main_menu import main_menu, languages
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram import Bot, Dispatcher, executor, types
+from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton, ContentTypes, message)
+# from buttons import main_menu
+from buttons.main_menu import *
+
 # from evos_main_logics import gif_file_id, company_info
+
 
 dotenv_path = '.env'
 load_dotenv(dotenv_path)
@@ -52,37 +53,97 @@ gif_file_id = 'CgACAgIAAxkBAAO_ZWwfNJY7S4-qkeziYRmngWKUqgwAAhkzAAKYQmFLgGVcrZ7UZ
 company_info = """
 Информация о компании:
 Сеть ресторанов быстрого обслуживания EVOS® не стоит на месте, а постоянно растет и развивается вместе с вами и для вас!
-Мы расширяем свою географию и открываем новые филиалы практически каждый месяц. 
-Сейчас в нашей сети насчитывается более 50 филиалов по всему Узбекистану. Поэтому мы всегда в поиске динамичных и 
-активных людей, которые хотят стать частью нашей команды и готовы строить свою карьеру в EVOS®. 
+Мы расширяем свою географию и открываем новые филиалы практически каждый месяц.
+Сейчас в нашей сети насчитывается более 50 филиалов по всему Узбекистану. Поэтому мы всегда в поиске динамичных и
+активных людей, которые хотят стать частью нашей команды и готовы строить свою карьеру в EVOS®.
 EVOS® – это надежный бренд, которому доверяют. Работа в EVOS® – гарантия стабильного заработка и перспективы карьерного
-роста. 
+роста.
 Начни свою карьеру в EVOS® уже сейчас!
 """
+
 
 @dp.message_handler(text="🏢 О компании")
 async def about_comp(message: types.Message):
     await bot.send_animation(message.from_user.id, gif_file_id, caption=company_info)
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+branch_text = """
+EVOS - крупнейшая фастфуд-компания в Узбекистане. На данный момент открыто 49 торговых точек и современное многопрофильное производство.
+
+Сотрудники компании это большая семья, которая развивается вместе и растет изо дня в день. Компания EVOS расширяется каждый день, сегодня нас более полутора тысяч. Стань частью нашей команды, добро пожаловать в семью EVOS!
+"""
+
+
+@dp.message_handler(text="📍 Филиалы")
+async def branches_handler(message: types.Message):
+    await bot.send_photo(message.from_user.id,
+                         "AgACAgIAAxkBAAIBS2VsVRVh_4FMa8krE2JrOx2lFYk1AAJJ2TEbpsxpS0ZozMeeMa86AQADAgADeAADMwQ",
+                         caption=branch_text, reply_markup=branches)
+
+
+@dp.message_handler(text="☕️ Показать ближайший филиал")
+async def near_branch_handler(message: types.Message):
+    await message.answer(text="Отправьте свое местоположение для определения ближайшего филиала",
+                         reply_markup=near_branch)
+
+
+
+@dp.message_handler(content_types=types.ContentTypes.LOCATION)
+async def get_location(message: types.Message):
+
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+
+    await message.answer(text="""Яккасарайский район, ул.Бобура 40А
++998712031212
+
+📍 Локация (https://maps.google.com/maps?q=41.285560,%2069.253166&ll=41.285560,%2069.253166&z=16)
+Дистанция: 0.32 км""")
+    await bot.send_photo(message.from_user.id,
+                         "AgACAgIAAxkBAAIBkWVsWIg6z2ono_ze0srn1E3_ktMmAAJY2TEbpsxpS_ES0TJoPuFmAQADAgADeAADMwQ",
+                         caption="""ул. Шота Руставели, 36
+📍 Локация (https://maps.google.com/maps?q=41.289749,%2069.257906&ll=41.289749,%2069.257906&z=16)
+Дистанция: 0.60 км""")
+    await bot.send_photo(message.from_user.id,
+                         "AgACAgIAAxkBAAIBlmVsWQ46RkrCRruOAttxxISvMorfAAJZ2TEbpsxpS6OnR3hIJMQPAQADAgADeQADMwQ",
+                         caption="""Узбекистан, Ташкент, ул. Мукими, 7
+📍 Локация (https://maps.google.com/maps?q=41.280080,%2069.241594&ll=41.280080,%2069.241594&z=16)
+Дистанция: 1.35 км""")
+
+
+@dp.message_handler(text="💼 Вакансии")
+async def vacancies(message: types.Message):
+    await message.answer(text="Присоединяйтесь в команду EVOS! \n📍 Выберите регион:", reply_markup=vacanciesss)
+
+
+@dp.message_handler(text="❌ Отмена ❌")
+async def choose_lang(message: types.Message):
+    await message.answer(text="Смена языка", reply_markup=main_menu)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~LANGUAGES HANDLERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @dp.message_handler(text="🇺🇿/🇷🇺 Язык")
 async def choose_lang(message: types.Message):
     await message.answer(text="Смена языка", reply_markup=languages)
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @dp.message_handler(text="🇷🇺 Русский")
 async def choose_lang(message: types.Message):
     await message.answer(text="Смена языка", reply_markup=main_menu)
 
+
 @dp.message_handler(text="🇺🇿 O'zbekcha")
 async def choose_lang(message: types.Message):
     await message.answer(text="Смена языка", reply_markup=main_menu)
 
-@dp.message_handler(text="🔙 Назад")
+
+@dp.message_handler(text="⬅️ Назад")
 async def choose_lang(message: types.Message):
     await message.answer(text="Смена языка", reply_markup=main_menu)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 if __name__ == '__main__':
