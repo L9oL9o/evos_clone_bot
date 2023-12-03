@@ -2,11 +2,11 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 main_menu = ReplyKeyboardMarkup(
     [
-        [KeyboardButton(text="Get Photo ID"), KeyboardButton(text="Get GIF ID")],
         [KeyboardButton(text="🏢 О компании"), KeyboardButton("📍 Филиалы")],
         [KeyboardButton(text="💼 Вакансии")],
         [KeyboardButton(text="📱 Меню"), KeyboardButton(text="🗣 Новости")],
         [KeyboardButton(text="📞 Контакты/Адрес"), KeyboardButton(text="🇺🇿/🇷🇺 Язык")],
+        [KeyboardButton(text="Get Photo ID"), KeyboardButton(text="Get GIF ID")],
 
     ], resize_keyboard=True)
 
@@ -35,10 +35,16 @@ languages = ReplyKeyboardMarkup(
     ], resize_keyboard=True
 )
 
-
 near_branch = ReplyKeyboardMarkup(
     [
         [KeyboardButton(text="📍Отправить геолокацию", request_location=True)],
         [KeyboardButton(text="⬅️ Назад")]
     ], resize_keyboard=True
 )
+
+tash_bracnes = ReplyKeyboardMarkup(
+    [
+        [KeyboardButton(text="📍Samarqan Darvoza"), KeyboardButton(text="📍Алайский Базар")],
+        [KeyboardButton(text="📍Малика"), KeyboardButton(text="📍Яхъё Гулямова, 94")],
+        [KeyboardButton(text="⬅️ Назад")],
+    ], resize_keyboard=True)

@@ -67,6 +67,8 @@ async def about_comp(message: types.Message):
     await bot.send_animation(message.from_user.id, gif_file_id, caption=company_info)
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~BRANCHES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 branch_text = """
 EVOS - крупнейшая фастфуд-компания в Узбекистане. На данный момент открыто 49 торговых точек и современное многопрофильное производство.
 
@@ -87,10 +89,8 @@ async def near_branch_handler(message: types.Message):
                          reply_markup=near_branch)
 
 
-
 @dp.message_handler(content_types=types.ContentTypes.LOCATION)
 async def get_location(message: types.Message):
-
     latitude = message.location.latitude
     longitude = message.location.longitude
 
@@ -111,6 +111,18 @@ async def get_location(message: types.Message):
 Дистанция: 1.35 км""")
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HEAD OFFICE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@dp.message_handler(text="🏢 Головной офис")
+async def head_office(message: types.Message):
+    await bot.send_photo(message.from_user.id,
+                         "AgACAgIAAxkBAAIB22VsXRzZUh3muM1QXBTrrvlXQv29AAJ82TEbpsxpS7IStc1V_t-DAQADAgADeQADMwQ",
+                         caption="""Адрес:  ул. Фурката 175, 1 подъезд, 4 этаж.
+Ориентир: MAKRO THE TOWER""")
+    await bot.send_location(message.from_user.id, latitude=.302196, longitude=.248867)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~VACANCIES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 @dp.message_handler(text="💼 Вакансии")
 async def vacancies(message: types.Message):
     await message.answer(text="Присоединяйтесь в команду EVOS! \n📍 Выберите регион:", reply_markup=vacanciesss)
@@ -119,6 +131,25 @@ async def vacancies(message: types.Message):
 @dp.message_handler(text="❌ Отмена ❌")
 async def choose_lang(message: types.Message):
     await message.answer(text="Смена языка", reply_markup=main_menu)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CONTACTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@dp.message_handler(text="📞 Контакты/Адрес")
+async def contact_handler(message: types.Message):
+    await bot.send_photo(message.from_user.id,
+                         "AgACAgIAAxkBAAIB-GVsatbSikbc1D_Yjd4fuHbj1JntAALF2TEbpsxpSy7uie-e0kWpAQADAgADeAADMwQ",
+                         caption="""📍Адрес:  ул. Фурката 175, 1 подъезд, 2 этаж.
+📌Ориентир: MAKRO THE TOWER
+
+📲 Контакты: +998 71 203 12 12""")
+    await bot.send_location(message.from_user.id, latitude=41.302196, longitude=69.248867 )
+
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MENU~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@dp.message_handler(text="📱 Меню")
+async def menu_handler(message: types.Message):
+    await message.answer(text="")
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~LANGUAGES HANDLERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
